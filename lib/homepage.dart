@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/utils/cards.dart';
 import 'package:taskify/utils/custom_appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
                   "Welcome back, Claudiu!",
                   style: TextStyle(
                     fontSize: 30,
+                    color: Color.fromARGB(255, 27, 26, 31),
                   ),
                 ),
                 Column(
@@ -59,18 +61,21 @@ class _HomePageState extends State<HomePage> {
                       height: 5,
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(23)),
-                          color: Colors.black12,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Stack(children: [
-                            const Text("Tasks"),
-                          ]),
-                        ),
-                      ),
+                      ProjectCard(
+                          Color.fromARGB(255, 19, 146, 186),
+                          Color.fromARGB(255, 145, 209, 230),
+                          "Furnito Web Design",
+                          0.2),
+                      ProjectCard(
+                          Color.fromARGB(255, 19, 146, 186),
+                          Color.fromARGB(255, 145, 209, 230),
+                          "Furnito Web Design",
+                          0.2),
+                      ProjectCard(
+                          Color.fromARGB(255, 19, 146, 186),
+                          Color.fromARGB(255, 145, 209, 230),
+                          "Furnito Web Design",
+                          0.2),
                     ]),
                   ],
                 ),
