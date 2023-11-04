@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
+import 'firebase_options.dart';
 
 Future<Widget> pageChooser() async {
   return const HomePage();
@@ -14,6 +16,10 @@ const mainColor = Color.fromARGB(255, 173, 216, 230);
 
 Future<void> main() async {
   page = await pageChooser();
+
+  WidgetsFlutterBinding.ensureInitialized;
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 

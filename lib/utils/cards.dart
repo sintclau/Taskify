@@ -4,11 +4,11 @@ import "package:flutter/material.dart";
 
 class ProjectCard extends StatelessWidget {
   final Color gradientColor1, gradientColor2;
-  final String title;
+  final String title, dueDate;
   final double progress;
 
-  ProjectCard(
-      this.gradientColor1, this.gradientColor2, this.title, this.progress);
+  ProjectCard(this.gradientColor1, this.gradientColor2, this.title,
+      this.dueDate, this.progress);
 
   String splitTitle(String title, int maxWords) {
     List<String> words = title.split(' ');
@@ -46,7 +46,7 @@ class ProjectCard extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             Text(
-              "Sat, 22 Nov 2023",
+              dueDate,
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
             const SizedBox(height: 2),
