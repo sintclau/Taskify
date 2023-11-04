@@ -104,21 +104,10 @@ class _HomePageState extends State<HomePage> {
                               itemCount: snap.length,
                               itemBuilder: (context, index) {
                                 // Setting project color
-                                var color1, color2;
-                                if (snap[index]['color'] == "blue") {
-                                  color1 = Color.fromARGB(255, 19, 146, 186);
-                                  color2 = Color.fromARGB(255, 145, 209, 230);
-                                } else if (snap[index]['color'] == "orange") {
-                                  color1 = Color.fromARGB(255, 255, 108, 68);
-                                  color2 = Color.fromARGB(255, 230, 162, 145);
-                                } else if (snap[index]['color'] == "purple") {
-                                  color1 = Color.fromARGB(255, 114, 66, 255);
-                                  color2 = Color.fromARGB(255, 171, 145, 230);
-                                } else {
-                                  // Setting default colors
-                                  color1 = Color.fromARGB(255, 19, 146, 186);
-                                  color2 = Color.fromARGB(255, 145, 209, 230);
-                                }
+                                var color1 =
+                                    colorSetter(snap[index]['color']).color1;
+                                var color2 =
+                                    colorSetter(snap[index]['color']).color2;
 
                                 // Formatting project creation date
                                 DateTime dueDate =
@@ -169,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Icon(
                           Icons.task,
-                          size: 25,
+                          size: 30,
                           color: Color.fromARGB(255, 19, 146, 186),
                         ),
                         SizedBox(width: 5),
@@ -204,21 +193,10 @@ class _HomePageState extends State<HomePage> {
                             itemCount: snap.length,
                             itemBuilder: (context, index) {
                               // Setting project color
-                              var color1, color2;
-                              if (snap[index]['color'] == "blue") {
-                                color1 = Color.fromARGB(255, 19, 146, 186);
-                                color2 = Color.fromARGB(255, 145, 209, 230);
-                              } else if (snap[index]['color'] == "orange") {
-                                color1 = Color.fromARGB(255, 255, 108, 68);
-                                color2 = Color.fromARGB(255, 230, 162, 145);
-                              } else if (snap[index]['color'] == "purple") {
-                                color1 = Color.fromARGB(255, 114, 66, 255);
-                                color2 = Color.fromARGB(255, 171, 145, 230);
-                              } else {
-                                // Setting default colors
-                                color1 = Color.fromARGB(255, 19, 146, 186);
-                                color2 = Color.fromARGB(255, 145, 209, 230);
-                              }
+                              var color1 =
+                                  colorSetter(snap[index]['color']).color1;
+                              var color2 =
+                                  colorSetter(snap[index]['color']).color2;
 
                               // Formatting project creation date
                               DateTime dueDate =
@@ -259,4 +237,39 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+class ColorSetter {
+  Color color1;
+  Color color2;
+
+  ColorSetter(this.color1, this.color2);
+}
+
+ColorSetter colorSetter(color) {
+  Color color1;
+  Color color2;
+
+  if (color == "blue") {
+    color1 = Color.fromARGB(255, 19, 146, 186);
+    color2 = Color.fromARGB(255, 145, 209, 230);
+  } else if (color == "orange") {
+    color1 = Color.fromARGB(255, 255, 108, 68);
+    color2 = Color.fromARGB(255, 230, 162, 145);
+  } else if (color == "purple") {
+    color1 = Color.fromARGB(255, 114, 66, 255);
+    color2 = Color.fromARGB(255, 171, 145, 230);
+  } else if (color == "red") {
+    color1 = Color.fromARGB(255, 233, 25, 25);
+    color2 = Color.fromARGB(255, 230, 145, 145);
+  } else if (color == "green") {
+    color1 = Color.fromARGB(255, 13, 191, 19);
+    color2 = Color.fromARGB(255, 151, 230, 145);
+  } else {
+    // Setting default colors
+    color1 = Color.fromARGB(255, 19, 146, 186);
+    color2 = Color.fromARGB(255, 145, 209, 230);
+  }
+
+  return ColorSetter(color1, color2);
 }
