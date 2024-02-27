@@ -1,10 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:taskify/login.dart';
 import 'homepage.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<Widget> pageChooser() async {
-  return const HomePage();
+  if (FirebaseAuth.instance.currentUser != null) {
+    return HomePage();
+  } else {
+    return LoginPage();
+  }
 }
 
 // Navigation Variables
@@ -15,10 +21,10 @@ final navigatorKey = GlobalKey<NavigatorState>();
 const mainColor = Color.fromARGB(255, 173, 216, 230);
 
 Future<void> main() async {
-  page = await pageChooser();
-
-  WidgetsFlutterBinding.ensureInitialized;
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  page = await pageChooser();
 
   runApp(const MyApp());
 }

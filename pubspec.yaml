@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^4.12.2
   intl: ^0.18.1
   side_sheet: ^1.0.4
+  flex_color_picker: ^3.3.0
+  firebase_auth: ^4.14.1
 
 dev_dependencies:
   flutter_test:

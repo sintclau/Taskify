@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:taskify/utils/cards.dart';
+import 'package:taskify/utils/color_picker.dart';
 import 'package:taskify/utils/custom_appbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -15,14 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.only(left: 35, top: 20),
                 child: Text(
-                  "Welcome back, Claudiu!",
+                  "Welcome back, ${FirebaseAuth.instance.currentUser!.displayName}!",
                   style: TextStyle(
                     fontSize: 30,
                     color: Color.fromARGB(255, 27, 26, 31),
@@ -82,7 +76,9 @@ class _HomePageState extends State<HomePage> {
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection("projects")
-                        .where('members', arrayContains: '1')
+                        .where('members',
+                            arrayContains:
+                                FirebaseAuth.instance.currentUser!.uid)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
@@ -178,8 +174,10 @@ class _HomePageState extends State<HomePage> {
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection("tasks")
-                        .where('assignedTo', arrayContains: '1')
-                        .where('priority', isEqualTo: "urgent")
+                        .where('assignedTo',
+                            arrayContains:
+                                FirebaseAuth.instance.currentUser!.uid)
+                        .where('priority', isEqualTo: "High")
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
@@ -250,25 +248,25 @@ ColorSetter colorSetter(color) {
   Color color1;
   Color color2;
 
-  if (color == "blue") {
-    color1 = Color.fromARGB(255, 19, 146, 186);
-    color2 = Color.fromARGB(255, 145, 209, 230);
-  } else if (color == "orange") {
-    color1 = Color.fromARGB(255, 255, 108, 68);
-    color2 = Color.fromARGB(255, 230, 162, 145);
-  } else if (color == "purple") {
-    color1 = Color.fromARGB(255, 114, 66, 255);
-    color2 = Color.fromARGB(255, 171, 145, 230);
-  } else if (color == "red") {
-    color1 = Color.fromARGB(255, 233, 25, 25);
-    color2 = Color.fromARGB(255, 230, 145, 145);
-  } else if (color == "green") {
-    color1 = Color.fromARGB(255, 13, 191, 19);
-    color2 = Color.fromARGB(255, 151, 230, 145);
+  if (color == "blue" || color == AppColors.primaryBlue) {
+    color1 = AppColors.primaryBlue;
+    color2 = AppColors.secondaryBlue;
+  } else if (color == "orange" || color == AppColors.primaryOrange) {
+    color1 = AppColors.primaryOrange;
+    color2 = AppColors.secondaryOrange;
+  } else if (color == "purple" || color == AppColors.primaryPurple) {
+    color1 = AppColors.primaryPurple;
+    color2 = AppColors.secondaryPurple;
+  } else if (color == "red" || color == AppColors.primaryRed) {
+    color1 = AppColors.primaryRed;
+    color2 = AppColors.secondaryRed;
+  } else if (color == "green" || color == AppColors.primaryGreen) {
+    color1 = AppColors.primaryGreen;
+    color2 = AppColors.secondaryGreen;
   } else {
     // Setting default colors
-    color1 = Color.fromARGB(255, 19, 146, 186);
-    color2 = Color.fromARGB(255, 145, 209, 230);
+    color1 = AppColors.primaryBlue;
+    color2 = AppColors.secondaryBlue;
   }
 
   return ColorSetter(color1, color2);
